@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Bartosz Kubicki <bartosz.kubicki@lizardmedia.pl>
+ * @copyright Copyright (C) 2020 Lizard Media (http://lizardmedia.pl)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/queue_topology.xsd">
+    <!-- Buffer entity exchange and queues section -->
+    <exchange name="entity.buffer" type="topic" connection="amqp">
+        <binding id="EntityBuffer" topic="#" destinationType="queue" destination="entity_buffer">
+            <arguments>
+                <argument name="x-dead-letter-exchange" xsi:type="string">entity</argument>
+                <argument name="x-message-ttl" xsi:type="number">25000</argument>
+            </arguments>
+        </binding>
+    </exchange>
+    <!-- End of buffer exchange and queues section -->
+
+    <!-- Main entity exchange and queues section -->
+    <exchange name="entity" type="topic" connection="amqp">
+        <binding id="CreateEntity" topic="entity.create" destinationType="queue" destination="create_entity">
+            <arguments>
+                <argument name="x-dead-letter-exchange" xsi:type="string">entity.dead_letter</argument>
+            </arguments>
+        </binding>
+        <binding id="ConfirmEntity" topic="entity.confirm" destinationType="queue" destination="confirm_entity">
+            <arguments>
+                <argument name="x-dead-letter-exchange" xsi:type="string">entity.dead_letter</argument>
+            </arguments>
+        </binding>
+        <binding id="CancelEntity" topic="entity.cancel" destinationType="queue" destination="cancel_entity">
+            <arguments>
+                <argument name="x-dead-letter-exchange" xsi:type="string">entity.dead_letter</argument>
+            </arguments>
+        </binding>
+    </exchange>
+    <!-- End of main exchange and queues section -->
+
+    <!-- Dead letter entity exchange and queues section -->
+    <exchange name="entity.dead_letter" type="topic" connection="amqp">
+        <binding id="EntityDeadLetter" topic="#" destinationType="queue" destination="entity_dead_letter">
+            <arguments>
+                <argument name="x-dead-letter-exchange" xsi:type="string">entity.retry</argument>
+                <argument name="x-message-ttl" xsi:type="number">15000</argument>
+            </arguments>
+        </binding>
+    </exchange>
+    <!-- End of dead letter exchange and queues section -->
+
+    <!-- Retry entity exchange and queues section -->
+    <exchange name="entity.retry" type="topic" connection="amqp">
+        <binding id="CreateEntityRetry" topic="entity.create" destinationType="queue" destination="create_entity">
+            <arguments>
+                <argument name="x-dead-letter-exchange" xsi:type="string">entity.dead_letter</argument>
+            </arguments>
+        </binding>
+        <binding id="ConfirmEntityRetry" topic="entity.confirm" destinationType="queue" destination="confirm_entity">
+            <arguments>
+                <argument name="x-dead-letter-exchange" xsi:type="string">entity.dead_letter</argument>
+            </arguments>
+        </binding>
+        <binding id="CancelEntityRetry" topic="entity.cancel" destinationType="queue" destination="cancel_entity">
+            <arguments>
+                <argument name="x-dead-letter-exchange" xsi:type="string">entity.dead_letter</argument>
+            </arguments>
+        </binding>
+    </exchange>
+    <!-- End of retry exchange and queues section -->
+</config>

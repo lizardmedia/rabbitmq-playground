@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Bartosz Kubicki <bartosz.kubicki@lizardmedia.pl>
+ * @copyright Copyright (C) 2020 Lizard Media (http://lizardmedia.pl)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/queue_consumer.xsd">
+    <consumer name="CreateEntity" queue="create_entity" connection="amqp"
+              consumerInstance="LizardMedia\RabbitMqPlayground\Queue\Consumer\RetryConsumerHandler"
+              handler="LizardMedia\RabbitMqPlayground\Queue\ConsumerHandler\Entity\Failure::execute"/>
+    <consumer name="ConfirmEntity" queue="confirm_entity" connection="amqp"
+              consumerInstance="LizardMedia\RabbitMqPlayground\Queue\Consumer\RetryConsumerHandler"
+              handler="LizardMedia\RabbitMqPlayground\Queue\ConsumerHandler\Entity\Success::execute"/>
+    <consumer name="Cancelentity" queue="cancel_entity" connection="amqp"
+              handler="LizardMedia\RabbitMqPlayground\Queue\ConsumerHandler\Entity\Cancellation::execute"/>
+</config>
