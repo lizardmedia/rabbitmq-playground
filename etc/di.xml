@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Bartosz Kubicki <bartosz.kubicki@lizardmedia.pl>
+ * @copyright Copyright (C) 2020 Lizard Media (http://lizardmedia.pl)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Console command section -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="feed:buffer" xsi:type="object">LizardMedia\RabbitMqPlayground\Console\Command\FeedBufferCommand</item>
+                <item name="feed" xsi:type="object">LizardMedia\RabbitMqPlayground\Console\Command\FeedCommand</item>
+                <item name="mass-feed" xsi:type="object">LizardMedia\RabbitMqPlayground\Console\Command\MassFeedCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- End of console command section -->
+
+    <!--  Constructor arguments injection section -->
+    <type name="LizardMedia\RabbitMqPlayground\Queue\Consumer\RetryConsumerHandler">
+        <arguments>
+            <argument name="envelopeCallbackType" xsi:type="string">LizardMedia\MessageQueue\Queue\Consumer\EnvelopeCallback\RetryLimit</argument>
+        </arguments>
+    </type>
+    <!--  End of constructor arguments injection section -->
+</config>
