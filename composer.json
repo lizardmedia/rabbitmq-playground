@@ -1,20 +1,21 @@
 {
-  "name": "lizardmedia/module-rabbitmq-playground",
-  "description": "Module testing rabbitmq implemention",
-  "require": {
-      "php": "~7.3.0||~7.4.0",
-      "lizardmedia/module-message-queue": "1.0.*",
-      "magento/framework-message-queue": "100.4.*",
-      "magento/framework": "103.0.*"
-  },
-  "type": "magento2-module",
-  "version": "1.0.1",
-  "autoload": {
-      "files": [
-          "registration.php"
-      ],
-      "psr-4": {
-          "LizardMedia\\RabbitMqPlayground\\": ""
-      }
-  }
+    "name": "lizardmedia/module-rabbitmq-playground",
+    "description": "Module testing rabbitmq implemention",
+    "require": {
+        "php": "~7.3.0||~7.4.0",
+        "lizardmedia/module-message-queue": "1.0.*",
+        "magento/framework-message-queue": "100.3.*||100.4.*",
+        "magento/framework": "102.0.*||103.0.*"
+    },
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "LizardMedia\\RabbitMqPlayground\\": ""
+        }
+    }
 }
