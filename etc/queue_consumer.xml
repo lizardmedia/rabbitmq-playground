@@ -13,5 +13,5 @@
               consumerInstance="LizardMedia\RabbitMqPlayground\Queue\Consumer\RetryConsumerHandler"
               handler="LizardMedia\RabbitMqPlayground\Queue\ConsumerHandler\Entity\Success::execute"/>
     <consumer name="Cancelentity" queue="cancel_entity" connection="amqp"
-              handler="LizardMedia\RabbitMqPlayground\Queue\ConsumerHandler\Entity\Cancellation::execute"/>
+              handler="LizardMedia\RabbitMqPlayground\Queue\ConsumerHandler\Entity\Success::execute"/>
 </config>

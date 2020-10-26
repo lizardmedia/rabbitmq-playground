@@ -49,7 +49,9 @@ bin/magento setup:upgrade
 
 Just install module and investigate topology created. Play around by 
 publishing messages (take a look at console commands) and observe how messages are handled. Every consumer handler
-has a sleep function inside to make sure that message processing is visible in rabbitmq admin panel
+has a sleep function inside to make sure that message processing is visible in rabbitmq admin panel messages chart.
+Change consumers (`Failure` / `Success` in `queue_consumer.xml` to test different situations.
+Topology created by the module should look like on the [graph](docs/topology.png)
 
 ## Contributing
 
